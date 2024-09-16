@@ -6,18 +6,19 @@ dotenv.config();
 const app = express();
 const port: Number = Number(process.env.PORTS);
 const dbUrl: string = process.env.MONGODB_URI as string;
-const imagePath : string = path.join(__dirname, 'images');
+const imagePath : string = path.join(__dirname, '/public/images');
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/src/images', express.static(imagePath));
+app.use('/public/images', express.static(imagePath));
 
 app.get("/", (req: Request, res: Response) => {
   res.send(`Welcome to Express server...`);
 });
 
-
+import userRoutes from './routes/user.routes';
+app.use('/user', userRoutes);
 
 app.listen(port, async () => {
   await mongoose
