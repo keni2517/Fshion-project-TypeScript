@@ -14,6 +14,21 @@ export default class UserServices {
     }
   }
 
+
+  async findOneUser(body: object) {
+    try {
+      let user: IUser | null= await User.findOne(body);
+      return user;
+      if (user === null) {
+        throw new Error('User not found');
+      }
+    }
+    catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
   // get single User
   async getUser(body: object) {
     try {
@@ -25,15 +40,17 @@ export default class UserServices {
     }
   }
 
-  // get single User by id
-  async getUserById(id: ObjectId) {
+  async getAllUser(body: object) {
     try {
-      return await User.findById(id);
+      let user = await User.find(body);
+      return user;
     } catch (error) {
       console.log(error);
       return error;
     }
   }
+
+
 
   // update User by id
   async updateUser(id: ObjectId, body: object) {
@@ -44,4 +61,17 @@ export default class UserServices {
       return error;
     }
   }
+
+  async getUserById(id: ObjectId) {
+    try {
+      return await User.findById(id);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  async delete(userId:ObjectId, body:object){
+    return await User.findByIdAndUpdate(userId,body,{new: true});
+}
 }

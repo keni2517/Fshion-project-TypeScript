@@ -17,8 +17,8 @@ app.get("/", (req: Request, res: Response) => {
   res.send(`Welcome to Express server...`);
 });
 
-import userRoutes from './routes/user.routes';
-app.use('/user', userRoutes);
+const userRoutes= require("./routes/user.routes");
+app.use("/api/user",userRoutes);
 
 app.listen(port, async () => {
   await mongoose
