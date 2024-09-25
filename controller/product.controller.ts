@@ -70,7 +70,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
     product = (await productService.updateProduct(productId, {
       isDelete: true,
     })) as IProduct;
-    res.status(200).json({ message: "Product is Deleted..." });
+    res.status(200).json({ message: "Product is Deleted..." }); 
   } catch (error) {
     console.log(error);
     res.json({ message: "Internal Server Error" });
