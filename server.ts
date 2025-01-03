@@ -24,6 +24,10 @@ app.use("/api/user",userRoutes);
 const productRoutes = require('./routes/product.routes')
 app.use("/api/product",productRoutes)
 
+
+const cartRoutes = require('./routes/product.routes')
+app.use("/api/cart",cartRoutes)
+
 app.listen(port, async () => {
   await mongoose
     .connect(dbUrl)
